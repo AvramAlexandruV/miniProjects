@@ -1,0 +1,8 @@
+﻿--> C# data base mock using classes
+-> emulate tables - using txt files
+
+--> Specs
+-> add data to our tables
+-> delete data from our tables
+-> read data from our tables
+-> update data in our tables
