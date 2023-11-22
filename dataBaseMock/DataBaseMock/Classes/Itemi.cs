@@ -38,7 +38,7 @@ namespace DataBaseMock.Classes
             this.PunctajItem = PunctajItem;
         }
 
-        public string toString() {
+        override public string ToString() {
             return "Item : " + idItem + " " + EnuntItem + " " + Raspuns1 + " " + Raspuns2 + " " + Raspuns3 + " " + RaspunsCorect + " " + PunctajItem;
         }
 

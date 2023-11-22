@@ -1,8 +1,19 @@
-﻿--> C# data base mock using classes
+﻿--> C# data base mock using classes <--
 -> emulate tables - using txt files
 
---> Specs
+--> Specs <--
 -> add data to our tables
 -> delete data from our tables
 -> read data from our tables
 -> update data in our tables
+
+--> Goal of the project <--
+-> teach the basic fundamentals of working with classes
+-> basic I/O functions
+-> introduce the database concept
+-> data manipulation via text files ( can be replaced by csv )
+-> teach the differences between constructor types
+-> introduce the override concept
+
+--> Credits <--
+-> datele mock au fost preluate din cadrul ONI sectiunea C#

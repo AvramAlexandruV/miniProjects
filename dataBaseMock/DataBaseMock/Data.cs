@@ -11,39 +11,31 @@ namespace DataBaseMock.Forms
 {
     class Data
     {
-        DirectoryInfo directory = new DirectoryInfo(Environment.CurrentDirectory);
+        string directory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName;
 
         public List<Utilizatori> utilizatori = new List<Utilizatori>();
         public List<Rezultate> rezultate = new List<Rezultate>();
         public List<Itemi> itemi = new List<Itemi>();
 
+        #region CitireDate
+
         public void CitireUtilizatori()
         {
             string utilizator;
-             StreamReader sr = new StreamReader(Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName, "./Data/Utilizatori.txt"));
-            
-            while ((utilizator = sr.ReadLine()) != null) {
+            StreamReader sr = new StreamReader(Path.Combine(directory, "./Data/Utilizatori.txt"));
+
+            while ((utilizator = sr.ReadLine()) != null)
+            {
                 string[] date = utilizator.Split(';');
                 utilizatori.Add(new Utilizatori(date[0], date[1], date[2]));
             }
 
             sr.Close();
         }
-
-        public void ScriereUtilizator(Utilizatori utilizator) {
-            StreamWriter fs = new StreamWriter(Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName, "./Data/Utilizatori.txt"), append: true);
-            fs.WriteLine();
-            fs.Write(utilizator.normalizare());
-
-            fs.Close();
-            this.CitireUtilizatori();
-
-        }
-
         public void CitireRezultate()
         {
             string rezultat;
-            StreamReader sr = new StreamReader(Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName, "./Data/Rezultate.txt"));
+            StreamReader sr = new StreamReader(Path.Combine(directory, "./Data/Rezultate.txt"));
 
             while ((rezultat = sr.ReadLine()) != null)
             {
@@ -53,21 +45,10 @@ namespace DataBaseMock.Forms
 
             sr.Close();
         }
-
-        public void ScriereRezultat(Rezultate rezultat)
-        {
-            StreamWriter fs = new StreamWriter(Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName, "./Data/Rezultate.txt"), append: true);
-            fs.WriteLine();
-            fs.Write(rezultat.normalizare(this.rezultate.Last().idRezultat));
-            
-            fs.Close();
-            this.CitireRezultate();
-        }
-
         public void CitireItemi()
         {
             string item;
-            StreamReader sr = new StreamReader(Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName, "./Data/Itemi.txt"));
+            StreamReader sr = new StreamReader(Path.Combine(directory, "./Data/Itemi.txt"));
 
             while ((item = sr.ReadLine()) != null)
             {
@@ -78,16 +59,66 @@ namespace DataBaseMock.Forms
             sr.Close();
         }
 
+        #endregion
+
+        #region ScriereDate
+
+        public void ScriereUtilizator(Utilizatori utilizator) {
+            StreamWriter fs = new StreamWriter(Path.Combine(directory, "./Data/Utilizatori.txt"), append: true);
+            fs.WriteLine();
+            fs.Write(utilizator.normalizare());
+
+            fs.Close();
+            this.CitireUtilizatori();
+
+        }
+        public void ScriereRezultat(Rezultate rezultat)
+        {
+            StreamWriter fs = new StreamWriter(Path.Combine(directory, "./Data/Rezultate.txt"), append: true);
+            fs.WriteLine();
+            fs.Write(rezultat.normalizare(this.rezultate.Last().idRezultat));
+            
+            fs.Close();
+            this.CitireRezultate();
+        }
         public void ScriereItem(Itemi item)
         {
-            StreamWriter fs = new StreamWriter(Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)?.Parent?.Parent?.Parent?.FullName, "./Data/Itemi.txt"), append: true);
+            StreamWriter fs = new StreamWriter(Path.Combine(directory, "./Data/Itemi.txt"), append: true);
             fs.WriteLine();
             fs.Write(item.normalizare(this.itemi.Last().idItem));
 
             fs.Close();
             this.CitireItemi();
         }
-    }
 
-   
+        #endregion
+
+        #region UpdatareDate
+
+        public void UpdateUtilizator(Utilizatori utilizator) {
+            
+        }
+        public void UpdateRezultat(Rezultate rezultat) { 
+        
+        }
+        public void UpdateItem(Itemi item) { 
+        
+        }
+
+        #endregion
+
+        #region StergereDate
+
+        public void StergereUtilizator(Utilizatori utilizator) { 
+        
+        }
+        public void StergereRezultat(Rezultate rezultat) { 
+        
+        }
+        public void StergereItem(Itemi item) { 
+        
+        }
+
+        #endregion
+    }
 }

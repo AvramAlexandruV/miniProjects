@@ -14,9 +14,9 @@ namespace DataBaseMock.Classes
         public string Parola { get; set; }
 
         public Utilizatori() {
-            EmailUtilizator = "a";
-            NumeUtilizator = "b";
-            Parola = "c";
+            EmailUtilizator = "";
+            NumeUtilizator = "";
+            Parola = "";
         }
 
         public Utilizatori(string EmailUtilizator, string NumeUtilizator, string Parola) {
@@ -25,7 +25,7 @@ namespace DataBaseMock.Classes
             this.Parola = Parola;
         }
 
-        public string toString() {
+        override public string ToString() {
             return "Datele Utlizatorului : " + EmailUtilizator + " " + NumeUtilizator + " " + Parola;
         }
 

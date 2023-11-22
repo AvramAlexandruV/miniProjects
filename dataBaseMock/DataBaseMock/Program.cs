@@ -15,7 +15,7 @@ namespace DataBaseMock
             dataBase.CitireItemi();
 
             foreach (Utilizatori u in dataBase.utilizatori) {
-                Console.WriteLine(u.toString());
+                Console.WriteLine(u.ToString());
             }
 
             Utilizatori tmp = new Utilizatori("alexav20044@gmail.com", "Alex Avram", "alex1234");
@@ -25,7 +25,7 @@ namespace DataBaseMock
             Console.WriteLine("---- Dupa inserare ----");
             foreach (Utilizatori u in dataBase.utilizatori)
             {
-                Console.WriteLine(u.toString());
+                Console.WriteLine(u.ToString());
             }
         }
     }

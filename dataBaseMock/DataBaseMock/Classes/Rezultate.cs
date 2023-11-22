@@ -28,7 +28,7 @@ namespace DataBaseMock.Classes
             this.PunctajJoc = PunctajJoc;
         }
 
-        public string toString() {
+        override public string ToString() {
             return "Rezultat : " + idRezultat + " " + TipJoc + " " + EmailUtilizator + " " + PunctajJoc;
         }
 
