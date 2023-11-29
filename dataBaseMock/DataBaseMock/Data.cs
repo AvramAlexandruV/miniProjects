@@ -21,39 +21,52 @@ namespace DataBaseMock.Forms
 
         public void CitireUtilizatori()
         {
+            utilizatori = new List<Utilizatori>();
+
             string utilizator;
             StreamReader sr = new StreamReader(Path.Combine(directory, "./Data/Utilizatori.txt"));
 
             while ((utilizator = sr.ReadLine()) != null)
             {
-                string[] date = utilizator.Split(';');
-                utilizatori.Add(new Utilizatori(date[0], date[1], date[2]));
+                if (utilizator != "") {
+                    string[] date = utilizator.Split(';');
+                    utilizatori.Add(new Utilizatori(date[0], date[1], date[2]));
+                }
             }
 
             sr.Close();
         }
         public void CitireRezultate()
         {
+            rezultate = new List<Rezultate>();
+
             string rezultat;
             StreamReader sr = new StreamReader(Path.Combine(directory, "./Data/Rezultate.txt"));
 
             while ((rezultat = sr.ReadLine()) != null)
             {
-                string[] date = rezultat.Split(';');
-                rezultate.Add(new Rezultate(Int32.Parse(date[0]), Int32.Parse(date[1]), date[2], Int32.Parse(date[3])));
+                if (rezultat != "")
+                {
+                    string[] date = rezultat.Split(';');
+                    rezultate.Add(new Rezultate(Int32.Parse(date[0]), Int32.Parse(date[1]), date[2], Int32.Parse(date[3])));
+                }
             }
 
             sr.Close();
         }
         public void CitireItemi()
         {
+            itemi = new List<Itemi>();
+
             string item;
             StreamReader sr = new StreamReader(Path.Combine(directory, "./Data/Itemi.txt"));
 
             while ((item = sr.ReadLine()) != null)
             {
-                string[] date = item.Split(';');
-                itemi.Add(new Itemi(Int32.Parse(date[0]), date[1], date[2], date[3], date[4], Int32.Parse(date[5]), Int32.Parse(date[6])));
+                if (item != "") {
+                    string[] date = item.Split(';');
+                    itemi.Add(new Itemi(Int32.Parse(date[0]), date[1], date[2], date[3], date[4], Int32.Parse(date[5]), Int32.Parse(date[6])));
+                }
             }
 
             sr.Close();
@@ -95,8 +108,22 @@ namespace DataBaseMock.Forms
 
         #region UpdatareDate
 
+        // updates all the lines where the primary key
+        // matches the key of the object given as a 
+        // parameter
+
         public void UpdateUtilizator(Utilizatori utilizator) {
-            
+            string[] lines = File.ReadAllLines(Path.Combine(directory, "./Data/Utilizatori.txt"));
+
+            for(int i = 0; i < lines.Length; i++){
+                string[] date = lines[i].Split(';');
+
+                if (date[0] == utilizator.EmailUtilizator) {
+                    lines[i] = utilizator.normalizare();
+                }
+            }
+
+            File.WriteAllLines(Path.Combine(directory, "./Data/Utilizatori.txt"), lines);
         }
         public void UpdateRezultat(Rezultate rezultat) { 
         

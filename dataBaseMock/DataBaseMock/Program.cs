@@ -27,6 +27,18 @@ namespace DataBaseMock
             {
                 Console.WriteLine(u.ToString());
             }
+
+            Console.WriteLine();
+            Console.WriteLine("---- Dupa modificare ----");
+            tmp = new Utilizatori("alexav20044@gmail.com", "Alex", "alex");
+
+            dataBase.UpdateUtilizator(tmp);
+            dataBase.CitireUtilizatori();
+
+            foreach (Utilizatori u in dataBase.utilizatori)
+            {
+                Console.WriteLine(u.ToString());
+            }
         }
     }
 }
